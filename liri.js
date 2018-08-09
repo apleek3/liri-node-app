@@ -1,80 +1,63 @@
-require("dotenv").config();
-var Spotify = require('node-spotify-api'),
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+require("dotenv").config(); //env security connection
+var Spotify = require('node-spotify-api'), //require variables
   request = require("request"),
+  express = require('express'),
   Twitter = require("twitter"),
   keys = require("./keys"); // {twitter: consumer_key..., spotify: id: ...}
 
 // HOMEWORK INSTRUCTION: Add the code required to import the `keys.js` file and store it in a variable.
-var spotify = new Spotify(keys.spotify);
-var client = new Twitter(keys.twitter);
-var command = process.argv[2];
+var spotify = new Spotify(keys.spotify); //new object using Spotify constructor
+var client = new Twitter(keys.twitter); //new object using Twitter constructor
+var command = process.argv[2]; //pulls the commands from the terminal
+// COMMANDS: movieThis, spotifyThis, twitterThis, doThis
 var name = process.argv[3];
+var router = express.Router();
 
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
 
-// console.log(
-//   client.get('statuses/user_timeline', function (error, tweets, response) {
-//     if (error) throw error;
-//     console.log(tweets);  // The favorites.
-//     //console.log(response);  // Raw response object.
-//   })
-
-// );
-
-
-
-
-if (command == 'movieThis') {
-  console.log(command);
+if (command == 'movieThis') { //calls movieThis command in terminal
   movieThis(name);
 };
 
-if (command == 'spotifyThis') {
-  //console.log(command);
+if (command == 'spotifyThis') { //calls spotifyThis command in terminal
   spotifyThis(name);
 };
 
-if (command == 'twitterThis') {
-  console.log(command);
+if (command == 'twitterThis') { //calls twitterThis command in terminal
   myTweets(name);
 };
 
-
+/*********************************************TWITTER THIS***************************************************** */
 /************************************************************************************************************** */
 /************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-/* function myTweets(user_name) {
+function myTweets(user_name) {
   //This will show your last 20 tweets and when they were created at in your terminal/bash window.
-  var params = { screen_name: user_name };
+  var params = { screen_name: user_name, count: 21 };
   client.get('statuses/user_timeline', params, function (error, tweets, response) {
     if (!error) {
-      console.log(tweets);
-      console.log(client.get(path, params, callback));
-      console.log(client.post(path, params, callback));
-      console.log(client.stream(path, params, callback));
+      console.log(tweets[0].user.name + "'s Last 20 Tweets are:");
+      for (i = 1; i < tweets.length; i++) {
+        console.log("Tweet #" + i + " of the last 20  :" + tweets[i].text);
+      }
     }
   });
-}; */
+};
 
-
+/**********************************************SPOTIFY THIS**************************************************** */
 /************************************************************************************************************** */
 /************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-
 function spotifyThis(song_name) {
-    //Default Song in case the user doesn't enter anything:
-    if (Boolean(name) === false) {
-      song_name = "ace of base"; //artists name returns song in search endpoint "The Sign"
-      console.log("YOU DIDN'T ENTER ANYTHING. Listen to THIS song:")
-    };
-    //Uses search endpoint in Spotify API from npm to retrieve song data.
+  //Default Song in case the user doesn't enter anything:
+  if (Boolean(name) === false) {
+    song_name = "ace of base"; //artists name returns song in search endpoint "The Sign"
+    console.log("YOU DIDN'T ENTER ANYTHING. Listen to THIS song:")
+  };
+  //Uses search endpoint in Spotify API from npm to retrieve song data.
   spotify.search({ type: 'track', query: song_name }, function (err, data) {
     if (err) { //error handling for Spotify API
       return console.log('Error occurred: ' + err);
@@ -86,13 +69,9 @@ function spotifyThis(song_name) {
   });
 };
 
+/***********************************************MOVIE THIS***************************************************** */
 /************************************************************************************************************** */
 /************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-
 
 function movieThis(movie_name) {
   //Default Movie in case the user doesn't enter anything:
@@ -115,18 +94,16 @@ function movieThis(movie_name) {
       console.log("The movie's Actor(s) is/are: " + JSON.parse(response.body).Actors);//* Actors in the movie.
     };
   });
-};//END OF MOVIETHIS FUNCTION
+};
 
 
 
 
 
+/***********************************************DO WHAT IT SAYS************************************************ */
 /************************************************************************************************************** */
 /************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
-/************************************************************************************************************** */
+
 
 function doWhatItSays() {
 
@@ -144,20 +121,8 @@ function doWhatItSays() {
 /************************************************************************************************************** */
 /************************************************************************************************************** */
 /*
-Make it so liri.js can take in one of the following commands:
-
-    * `my-tweets`
-
-    * `spotify-this-song`
-
-    * `movie-this`
-
     * `do-what-it-says`
-  
 
-    1. `node liri.js my-tweets`
-
-   * This will show your last 20 tweets and when they were created at in your terminal/bash window.
 
 
 4. `node liri.js do-what-it-says`
