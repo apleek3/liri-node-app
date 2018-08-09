@@ -1,68 +1,107 @@
 require("dotenv").config();
+var Spotify = require('node-spotify-api'),
+  request = require("request"),
+  Twitter = require("twitter"),
+  keys = require("./keys"); // {twitter: consumer_key..., spotify: id: ...}
 
 // HOMEWORK INSTRUCTION: Add the code required to import the `keys.js` file and store it in a variable.
 var spotify = new Spotify(keys.spotify);
-//var client = new Twitter(keys.twitter);
-
+var client = new Twitter(keys.twitter);
 var command = process.argv[2];
-var request = require("request");
 var name = process.argv[3];
+
+
+// console.log(
+//   client.get('statuses/user_timeline', function (error, tweets, response) {
+//     if (error) throw error;
+//     console.log(tweets);  // The favorites.
+//     //console.log(response);  // Raw response object.
+//   })
+
+// );
+
+
+
 
 if (command == 'movieThis') {
   console.log(command);
   movieThis(name);
 };
 
-
-/* PULLED FROM NPM SPOTIFY
-var SpotifyWebApi = require('spotify-web-api-node');
- 
-// credentials are optional
-var spotifyApi = new SpotifyWebApi({
-  clientId: 'fcecfc72172e4cd267473117a17cbd4d',
-  clientSecret: 'a6338157c9bb5ac9c71924cb2940e1a7',
-  redirectUri: 'http://www.example.com/callback'
-});
-*/
-
-function myTweets() {
-  //This will show your last 20 tweets and when they were created at in your terminal/bash window.
+if (command == 'spotifyThis') {
+  //console.log(command);
+  spotifyThis(name);
 };
 
-function spotifyThis(song_name) {
-/*
-  // A request to the OMDB API with the movie specified
-  request("http://www.omdbapi.com/?t=" + movie_name + "&plot=short&apikey=trilogy", function (error, response) {
+if (command == 'twitterThis') {
+  console.log(command);
+  myTweets(name);
+};
 
-    // Should I need to check the data:
-    // console.log(resonse); 
 
-    // If the request is successful (i.e. if the response status code is 200)
-    if (!error && response.statusCode === 200) {
-      // List of Movie Information per instructions:
-      console.log("This song's Artist is: " + JSON.parse(response.body).Title); //* Artist(s)
-      console.log("This song's Name is: " + JSON.parse(response.body).Year);  //* The song's name
-      console.log("This song's preview can be found at this link: " + JSON.parse(response.body).imdbRating);  //* A preview link of the song from Spotify
-      console.log("This song's Album of origin is: " + JSON.parse(response.body).Ratings[1].Value);  //* The album that the song is from
-    } else {
-      console.log("No song was provided. Here's some information about 'The Sign' by Ace of Base.: " + JSON.parse(response.body).Country);  //* If no song is provided then your program will default to "The Sign" by Ace of Base.
- */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/* function myTweets(user_name) {
+  //This will show your last 20 tweets and when they were created at in your terminal/bash window.
+  var params = { screen_name: user_name };
+  client.get('statuses/user_timeline', params, function (error, tweets, response) {
+    if (!error) {
+      console.log(tweets);
+      console.log(client.get(path, params, callback));
+      console.log(client.post(path, params, callback));
+      console.log(client.stream(path, params, callback));
     }
- 
   });
+}; */
 
 
-}; //END OF SPOTIFYTHIS
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+
+function spotifyThis(song_name) {
+    //Default Song in case the user doesn't enter anything:
+    if (Boolean(name) === false) {
+      song_name = "ace of base"; //artists name returns song in search endpoint "The Sign"
+      console.log("YOU DIDN'T ENTER ANYTHING. Listen to THIS song:")
+    };
+    //Uses search endpoint in Spotify API from npm to retrieve song data.
+  spotify.search({ type: 'track', query: song_name }, function (err, data) {
+    if (err) { //error handling for Spotify API
+      return console.log('Error occurred: ' + err);
+    }
+    console.log("The song you searched for is: " + data.tracks.items[0].name); //Song's NAME
+    console.log("This song is performed by: " + data.tracks.items[0].artists[0].name) //ARTISTS
+    console.log("The name of the album this song is from is: " + data.tracks.items[0].album.name); //Album NAME
+    console.log("A preview of this song can be found at this link:  " + data.tracks.items[0].preview_url); // PREVIEW url
+  });
+};
+
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
 
 
 function movieThis(movie_name) {
-
+  //Default Movie in case the user doesn't enter anything:
+  if (Boolean(name) === false) {
+    movie_name = "Mr. Nobody";
+    console.log("YOU DIDN'T ENTER ANYTHING. Watch THIS movie:")
+  };
   // A request to the OMDB API with the movie specified
   request("http://www.omdbapi.com/?t=" + movie_name + "&plot=short&apikey=trilogy", function (error, response) {
-
-    // Should I need to check the data:
-    // console.log(resonse); 
-
     // If the request is successful (i.e. if the response status code is 200)
     if (!error && response.statusCode === 200) {
       // List of Movie Information per instructions:
@@ -74,24 +113,20 @@ function movieThis(movie_name) {
       console.log("The movie's Language is: " + JSON.parse(response.body).Language);//* Language of the movie.
       console.log("The movie's Plot (in summary) is: " + JSON.parse(response.body).Plot);//* Plot of the movie.
       console.log("The movie's Actor(s) is/are: " + JSON.parse(response.body).Actors);//* Actors in the movie.
-    }
+    };
   });
+};//END OF MOVIETHIS FUNCTION
 
-}; //END OF MOVIETHIS FUNCTION
 
-  /*
 
-  
-  
-  
-  
-  
-  
-  
-  
 
-  //If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
-};
+
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
 
 function doWhatItSays() {
 
@@ -102,7 +137,12 @@ function doWhatItSays() {
   //* Feel free to change the text in that document to test out the feature for other commands.
 };
 
-
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
+/************************************************************************************************************** */
 /*
 Make it so liri.js can take in one of the following commands:
 
@@ -119,54 +159,6 @@ Make it so liri.js can take in one of the following commands:
 
    * This will show your last 20 tweets and when they were created at in your terminal/bash window.
 
-2. `node liri.js spotify-this-song '<song name here>'`
-
-   * This will show the following information about the song in your terminal/bash window
-     
-     * Artist(s)
-     
-     * The song's name
-     
-     * A preview link of the song from Spotify
-     
-     * The album that the song is from
-
-   * If no song is provided then your program will default to "The Sign" by Ace of Base.
-   
-   * You will utilize the [node-spotify-api](https://www.npmjs.com/package/node-spotify-api) package in order to retrieve song information from the Spotify API.
-   
-   * Like the Twitter API, the Spotify API requires you sign up as a developer to generate the necessary credentials. You can follow these steps in order to generate a **client id** and **client secret**:
-
-   * Step One: Visit <https://developer.spotify.com/my-applications/#!/>
-   
-   * Step Two: Either login to your existing Spotify account or create a new one (a free account is fine) and log in.
-
-   * Step Three: Once logged in, navigate to <https://developer.spotify.com/my-applications/#!/applications/create> to register a new application to be used with the Spotify API. You can fill in whatever you'd like for these fields. When finished, click the "complete" button.
-
-   * Step Four: On the next screen, scroll down to where you see your client id and client secret. Copy these values down somewhere, you'll need them to use the Spotify API and the [node-spotify-api package](https://www.npmjs.com/package/node-spotify-api).
-
-3. `node liri.js movie-this '<movie name here>'`
-
-   * This will output the following information to your terminal/bash window:
-
-     ```
-       * Title of the movie.
-       * Year the movie came out.
-       * IMDB Rating of the movie.
-       * Rotten Tomatoes Rating of the movie.
-       * Country where the movie was produced.
-       * Language of the movie.
-       * Plot of the movie.
-       * Actors in the movie.
-     ```
-
-   * If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
-     
-     * If you haven't watched "Mr. Nobody," then you should: <http://www.imdb.com/title/tt0485947/>
-     
-     * It's on Netflix!
-   
-   * You'll use the request package to retrieve data from the OMDB API. Like all of the in-class activities, the OMDB API requires an API key. You may use `trilogy`.
 
 4. `node liri.js do-what-it-says`
    
