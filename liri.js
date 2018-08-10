@@ -15,7 +15,7 @@ var client = new Twitter(keys.twitter); //new object using Twitter constructor
 var command = process.argv[2]; //pulls the commands from the terminal
 var name = process.argv[3]; // COMMANDS: movieThis, spotifyThis, twitterThis, doThis
 
-var logger = fs.createWriteStream('./log.txt ', { // used to log commands and data to log.txt
+var logger = fs.createWriteStream('log.txt', { // used to log commands and data to log.txt
   flags: 'a' // 'a' means appending (old data will be preserved)
 });
 

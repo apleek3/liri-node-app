@@ -1,0 +1,45 @@
+COMMAND: spotifyThis, QUERY: another one bites the dust
+The song you searched for is: Another One Bites The Dust
+This song is performed by: Queen
+The name of the album this song is from is: The Game (Deluxe Remastered Version)
+A preview of this song can be found at this link:  null
+
+DO-WHAT-IT-SAYS COMMAND. Reads from random.txt
+COMMAND: spotifyThis, QUERY: i want it that way
+The song you searched for is: I Want It That Way
+This song is performed by: Backstreet Boys
+The name of the album this song is from is: The Hits--Chapter One
+A preview of this song can be found at this link:  https://p.scdn.co/mp3-preview/e72a05dc3f69c891e3390c3ceaa77fad02f6b5f6?cid=2374d32852114f3cbb9769bccd7fcd15
+
+COMMAND: twitterThis, QUERY: @alexlee
+Tweet #1 of the last 20  :Dear diary today I fell asleep on the train and missed my stop....
+Tweet #2 of the last 20  :Why with today’s technology is Wifi on trains so bad? #FirstWorldProblems
+Tweet #3 of the last 20  :I just earned the 'Riding Steady (Level 12)' badge on @untappd! https://t.co/vSDZoSex2r
+Tweet #4 of the last 20  :I just earned the 'Cheers To You! (Level 4)' badge on @untappd! https://t.co/CyWPyiak96
+Tweet #5 of the last 20  :View my verified achievement from Microsoft on Acclaim. https://t.co/DRgl4G5Yhn
+Tweet #6 of the last 20  :Finally finished Christmas dinner prep!#ChristmasEve2017 #CountdowntoChristmas #ChristmasDinner
+Tweet #7 of the last 20  :Sitting my first exam today in a long time but on my way to a Microsoft MCSE #backtoschool #alwayslearning
+Tweet #8 of the last 20  :Wow Christmas has come early, thanks @CrossCountryUK 5 car service to Birmingham, we’ve dreamed of this! #ChristmasMiracle
+Tweet #9 of the last 20  :New Azure Free Account | Cloud and DevOps https://t.co/oY5TKXB6ys
+Tweet #10 of the last 20  :I just earned the 'Pale as the Moon (Level 5)' badge on @untappd! https://t.co/SSQ9gyPaT8
+Tweet #11 of the last 20  :I just earned the '500 Million Beers' badge on @untappd! https://t.co/jPh8wTZWj6 #ut500m
+Tweet #12 of the last 20  :I’ll drink to that! https://t.co/gYaBnQOQsY
+Tweet #13 of the last 20  :Wow @STWDraycote you would have thought you would encourage people rather than banning dogs from the reservoir #idiotsincharge
+Tweet #14 of the last 20  :A little drone video from the Warwick Dragon Boat race (need to up my editing skills) #warwickrotary... https://t.co/I7IpgLIjRN
+Tweet #15 of the last 20  :https://t.co/sJrilZFN9O https://t.co/KleBG3PnVd
+Tweet #16 of the last 20  :First time I've had my pictures up at a gallery! #proud #ondisplay… https://t.co/0XM6qm925W
+Tweet #17 of the last 20  :I just earned the 'God Save the Queen  (Level 23)' badge on @untappd! https://t.co/TI0RwD9YMi
+Tweet #18 of the last 20  :Join me at TP ICAP L'Etape London by Le Tour de France 2017 on 24 September 2017!  https://t.co/uiSNbIsvIA
+Tweet #19 of the last 20  :I’ve entered for a chance to be right behind @TeamSky
+https://t.co/cD3yU6YGXR https://t.co/xchU00FMhj
+Tweet #20 of the last 20  :I just earned the 'Wheel of Styles (Level 5)' badge on @untappd! https://t.co/458xOg5aZs
+
+COMMAND: movieThis, QUERY: tremors
+The movie's Title is: Tremors
+The movie's Production Year is: 1990
+The movie's IMDB Rating is: 7.2
+The movie's Rotten Tomatoes Score is: 85%
+The movie's Production Country is: USAThe movie's Language is: English
+The movie's Plot (in summary) is: Natives of a small isolated town defend themselves against strange underground creatures which are killing them one by one.
+The movie's Actor(s) is/are: Kevin Bacon, Fred Ward, Finn Carter, Michael Gross
+
